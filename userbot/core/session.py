@@ -16,7 +16,7 @@ else:
     session = "O9937"
 
 try:
-    iqthon = CatUserBotClient(
+    O9937 = CatUserBotClient(
         session=session,
         api_id=Config.APP_ID,
         api_hash=Config.API_HASH,

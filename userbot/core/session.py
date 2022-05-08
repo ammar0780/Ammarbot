@@ -31,7 +31,7 @@ except Exception as e:
     sys.exit()
 
 
-iqthon.tgbot = tgbot = CatUserBotClient(
+O9937.tgbot = tgbot = CatUserBotClient(
     session="O9937",
     api_id=Config.APP_ID,
     api_hash=Config.API_HASH,

@@ -17,7 +17,7 @@ from telethon.tl import functions, types
 from telethon.tl.functions.messages import GetStickerSetRequest
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 from telethon.tl.types import     DocumentAttributeFilename,    DocumentAttributeSticker,    InputStickerSetID,    MessageMediaPhoto
-from userbot import O9937
+from userbot import iqthon
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.functions import crop_and_divide
 from ..helpers.tools import media_type
@@ -30,8 +30,8 @@ def verify_cond(catarray, text):
     return any(i in text for i in catarray)
 def pack_name(userid, pack, is_anim):
     if is_anim:
-        return f"O9937bot_{userid}_{pack}_anim"
-    return f"O9937bot_{userid}_{pack}"
+        return f"iqthonbot_{userid}_{pack}_anim"
+    return f"iqthonbot_{userid}_{pack}"
 def char_is_emoji(character):
     return character in catemoji.UNICODE_EMOJI["en"]
 def pack_nick(username, pack, is_anim):
@@ -140,7 +140,7 @@ async def add_to_pack(    catevent,    conv,    args,    packname,    pack,    u
     if not pkang:
         return packname, emoji
     return pack, packname
-@O9937.on(admin_cmd(pattern="صنع ملصق(?:\s|$)([\s\S]*)"))    
+@iqthon.on(admin_cmd(pattern="صنع ملصق(?:\s|$)([\s\S]*)"))    
 async def kang(args):  
     photo = None
     emojibypass = False
@@ -153,7 +153,7 @@ async def kang(args):
             user.first_name.encode("utf-8").decode("ascii")
             username = user.first_name
         except UnicodeDecodeError:
-            username = f"O9937_{user.id}"
+            username = f"iqthon_{user.id}"
     else:
         username = user.username
     userid = user.id
@@ -230,7 +230,7 @@ async def kang(args):
                 await edit_delete(                    catevent,                    f"ملصق لحزمة مختلفة ! \n والحزمة التي تم إنشاؤها حديثًا هي : [ملصقك هنا](t.me/addstickers/{packname}) ",                    parse_mode="md",                    time=10   )
             else:
                 await edit_delete(                    catevent,                    f"إنشاء ملصق بنجاح !  \n الحزمه هيه :  [ هنا](t.me/addstickers/{packname}) ",                    parse_mode="md",                    time=10   )
-@O9937.on(admin_cmd(pattern="جلب الملصقات(?:\s|$)([\s\S]*)"))    
+@iqthon.on(admin_cmd(pattern="جلب الملصقات(?:\s|$)([\s\S]*)"))    
 async def pack_kang(event):  
     user = await event.client.get_me()
     if user.username:
@@ -240,7 +240,7 @@ async def pack_kang(event):
             user.first_name.encode("utf-8").decode("ascii")
             username = user.first_name
         except UnicodeDecodeError:
-            username = f"O9937_{user.id}"
+            username = f"iqthon_{user.id}"
     photo = None
     userid = user.id
     is_anim = False
@@ -324,7 +324,7 @@ async def pack_kang(event):
     for i in enumerate(blablapacks):
         result += (            f"  •  [pack {blablapacknames[i[0]]}](t.me/addstickers/{blablapacks[i[0]]})"        )
     await catevent.edit(result)
-@O9937.on(admin_cmd(pattern="انشاء حزمه ملصقات(?:\s|$)([\s\S]*)"))   
+@iqthon.on(admin_cmd(pattern="انشاء حزمه ملصقات(?:\s|$)([\s\S]*)"))   
 async def pic2packcmd(event):
     reply = await event.get_reply_message()
     mediatype = media_type(reply)
@@ -343,7 +343,7 @@ async def pic2packcmd(event):
     except Exception:
         emoji = "▫️"
     chat = "@Stickers"
-    name = "O9937bot_" + "".join(        random.choice(list(string.ascii_lowercase + string.ascii_uppercase))
+    name = "iqthonbot_" + "".join(        random.choice(list(string.ascii_lowercase + string.ascii_uppercase))
         for _ in range(16)    )
     image = await _cattools.media_to_pic(catevent, reply, noedits=True)
     if image[1] is None:
@@ -395,7 +395,7 @@ async def pic2packcmd(event):
 
         except YouBlockedUserError:
             await catevent.edit(                "قم بارسال رساله الى : @Stickers "            )
-@O9937.on(admin_cmd(pattern="جلب معلومات الملصق$"))    
+@iqthon.on(admin_cmd(pattern="جلب معلومات الملصق$"))    
 async def get_pack_info(event):
     if not event.is_reply:
         return await edit_delete(            event, "لا يمكنني إحضار المعلومات", 5        )
@@ -423,7 +423,7 @@ async def get_pack_info(event):
         f"**ملصقات حزمة:** `{get_stickerset.set.count}`\n"
         f"**ايموجيات الحزمه :**\n{' '.join(pack_emojis)}"    )
     await catevent.edit(OUTPUT)
-@O9937.on(admin_cmd(pattern="ملصق ?([\s\S]*)"))    
+@iqthon.on(admin_cmd(pattern="ملصق ?([\s\S]*)"))    
 async def cb_sticker(event):
     split = event.pattern_match.group(1)
     if not split:

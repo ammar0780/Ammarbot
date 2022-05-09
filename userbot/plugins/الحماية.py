@@ -18,7 +18,7 @@ from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.functions.messages import ExportChatInviteRequest
 from collections import deque
 from random import choice
-from userbot import O9937
+from userbot import IQTHON
 from userbot.core.logger import logging
 from ..Config import Config
 from ..core.managers import edit_delete, edit_or_reply
@@ -313,7 +313,7 @@ async def do_pm_spam_action(event, chat):
     except BaseException:
         return
 
-@O9937.iq_cmd(incoming=True, func=lambda e: e.is_private, edited=False, forword=None)
+@IQTHON.iq_cmd(incoming=True, func=lambda e: e.is_private, edited=False, forword=None)
 async def on_new_private_message(event):
     if gvarstatus("pmpermit") is None:
         return
@@ -334,7 +334,7 @@ async def on_new_private_message(event):
         return await do_pm_options_action(event, chat)
     await do_pm_permit_action(event, chat)
 
-@O9937.iq_cmd(outgoing=True, func=lambda e: e.is_private, edited=False, forword=None)
+@IQTHON.iq_cmd(outgoing=True, func=lambda e: e.is_private, edited=False, forword=None)
 async def you_dm_other(event):
     if gvarstatus("pmpermit") is None:
         return
@@ -381,7 +381,7 @@ async def you_dm_other(event):
         sql.del_collection("pmmessagecache")
         sql.add_collection("pmmessagecache", PMMESSAGE_CACHE, {})
 
-@O9937.tgbot.on(CallbackQuery(data=re.compile(rb"show_pmpermit_options")))
+@IQTHON.tgbot.on(CallbackQuery(data=re.compile(rb"show_pmpermit_options")))
 async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == event.client.uid:
         text = "**   عـذرا ، هـذه الـخـيـارات لـلـمـسـتـخـدم الـذي يـراسـلـك **"
@@ -404,7 +404,7 @@ async def on_plug_in_callback_query_handler(event):
         sql.add_collection("pmwarns", PM_WARNS, {})
     await event.edit(text, buttons=buttons)
 
-@O9937.tgbot.on(CallbackQuery(data=re.compile(rb"to_enquire_something")))
+@IQTHON.tgbot.on(CallbackQuery(data=re.compile(rb"to_enquire_something")))
 async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == event.client.uid:
         text = "**   عـذرا ، هـذه الـخـيـارات لـلـمـسـتـخـدم الـذي يـراسـلـك **"
@@ -421,7 +421,7 @@ async def on_plug_in_callback_query_handler(event):
         sql.add_collection("pmwarns", PM_WARNS, {})
     sqllist.rm_from_list("pmoptions", event.query.user_id)
     await event.edit(text)
-@O9937.tgbot.on(CallbackQuery(data=re.compile(rb"to_request_something")))
+@IQTHON.tgbot.on(CallbackQuery(data=re.compile(rb"to_request_something")))
 async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == event.client.uid:
         text = "**   عـذرا ، هـذه الـخـيـارات لـلـمـسـتـخـدم الـذي يـراسـلـك **"
@@ -439,7 +439,7 @@ async def on_plug_in_callback_query_handler(event):
     sqllist.rm_from_list("pmoptions", event.query.user_id)
     await event.edit(text)
 
-@O9937.tgbot.on(CallbackQuery(data=re.compile(rb"to_chat_with_my_master")))
+@IQTHON.tgbot.on(CallbackQuery(data=re.compile(rb"to_chat_with_my_master")))
 async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == event.client.uid:
         text = "**   عـذرا ، هـذه الـخـيـارات لـلـمـسـتـخـدم الـذي يـراسـلـك **"
@@ -457,7 +457,7 @@ async def on_plug_in_callback_query_handler(event):
     sqllist.rm_from_list("pmoptions", event.query.user_id)
     await event.edit(text)
 
-@O9937.tgbot.on(CallbackQuery(data=re.compile(rb"to_spam_my_master_inbox")))
+@IQTHON.tgbot.on(CallbackQuery(data=re.compile(rb"to_spam_my_master_inbox")))
 async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == event.client.uid:
         text = "**   عـذرا ، هـذه الـخـيـارات لـلـمـسـتـخـدم الـذي يـراسـلـك **"
@@ -474,7 +474,7 @@ async def on_plug_in_callback_query_handler(event):
         sql.add_collection("pmwarns", PM_WARNS, {})
     sqllist.rm_from_list("pmoptions", event.query.user_id)
     await event.edit(text)
-@O9937.on(admin_cmd(pattern="الحماية (تشغيل|ايقاف)(?: |$)(.*)"))
+@IQTHON.on(admin_cmd(pattern="الحماية (تشغيل|ايقاف)(?: |$)(.*)"))
 async def pmpermit_on(event):
     input_str = event.pattern_match.group(1)
     if input_str == "تشغيل":
@@ -488,7 +488,7 @@ async def pmpermit_on(event):
         await edit_delete(event, "**  تـم تـعـطـيـل امـر الـحـمـايـة لـحـسـابـك بـنـجـاح  ✅**")
     else:
         await edit_delete(event, "**   امـر الـحـمـايـة بـالـفـعـل مُـعَـطـل لـحـسـابـك **")
-@O9937.on(admin_cmd(pattern="الحماية (تشغيل|ايقاف)(?: |$)(.*)"))
+@IQTHON.on(admin_cmd(pattern="الحماية (تشغيل|ايقاف)(?: |$)(.*)"))
 async def pmpermit_on(event):
     input_str = event.pattern_match.group(1)
     if input_str == "ايقاف":
@@ -502,7 +502,7 @@ async def pmpermit_on(event):
         await edit_delete(event, "**   تـم تـفـعـيـل امـر الـحـمـايـة لـحـسـابـك بـنـجـاح  ✅**")
     else:
         await edit_delete(event, "**  امـر الـحـمـايـة بـالـفـعـل مُـمَـكـن لـحـسـابـك  **")
-@O9937.on(admin_cmd(pattern="(ق|قبول)(?:\s|$)([\s\S]*)"))
+@IQTHON.on(admin_cmd(pattern="(ق|قبول)(?:\s|$)([\s\S]*)"))
 async def approve_p_m(event):  # sourcery no-metrics
     if gvarstatus("pmpermit") is None:
         return await edit_delete(event, f"**   يــجـب تـفـعـيـل امـر الحـمـايـة أولاً بـأرســال ** {cmdhd} الـحماية تشغيل  لـتـفـعـيـل هـذا الأمـر .⚠️❕")
@@ -552,7 +552,7 @@ async def approve_p_m(event):  # sourcery no-metrics
         sql.add_collection("pmmessagecache", PMMESSAGE_CACHE, {})
     else:
         await edit_delete(event, f"[{user.first_name}](tg://user?id={user.id}) \n    هـو بـالـفـعل فـي قـائـمـة الـسـمـاح ✅")
-@O9937.on(admin_cmd(pattern="(ر|رفض)(?:\s|$)([\s\S]*)"))
+@IQTHON.on(admin_cmd(pattern="(ر|رفض)(?:\s|$)([\s\S]*)"))
 async def disapprove_p_m(event):
     if gvarstatus("pmpermit") is None:
         return await edit_delete(event, f"**   يــجـب تـفـعـيـل امـر الحـمـايـة أولاً بـأرســال ** {cmdhd} الـحماية تشغيل  لـتـفـعـيـل هـذا الأمـر .⚠️❕")
@@ -576,7 +576,7 @@ async def disapprove_p_m(event):
         await edit_or_reply(event, f"[{user.first_name}](tg://user?id={user.id})\n**   تـم رفـضـه مـن أرسـال الـرسـائـل ⚠️**\n**   الـسـبـب ❔  Refused to send messages ** {reason}")
     else:
         await edit_delete(event, f"[{user.first_name}](tg://user?id={user.id})\n **    لــم يـتـم الـمـوافـقـة عـلـيـه مـسـبـقـاً ❕ **")
-@O9937.on(admin_cmd(pattern="مرفوض(?:\s|$)([\s\S]*)"))
+@IQTHON.on(admin_cmd(pattern="مرفوض(?:\s|$)([\s\S]*)"))
 async def block_p_m(event):
     if gvarstatus("pmpermit") is None:
         return await edit_delete(event, f"**   يــجـب تـفـعـيـل امـر الحـمـايـة أولاً بـأرســال ** {cmdhd} الـحماية تشغيل  لـتـفـعـيـل هـذا الأمـر .⚠️❕")
@@ -613,7 +613,7 @@ async def block_p_m(event):
     sql.add_collection("pmmessagecache", PMMESSAGE_CACHE, {})
     await event.client(functions.contacts.BlockRequest(user.id))
     await edit_delete(event, f"[{user.first_name}](tg://user?id={user.id})\n **   تـم حـظـره بـنـجـاح ، لا يـمـكـنـه مـراسـلـتـك بـعـد الان **\n**   الـسـبـب ❔  A user has been successfully blocked.  He can't message you anymore. ** {reason}")
-@O9937.on(admin_cmd(pattern="مقبول(?:\s|$)([\s\S]*)"))
+@IQTHON.on(admin_cmd(pattern="مقبول(?:\s|$)([\s\S]*)"))
 async def unblock_pm(event):
     if gvarstatus("pmpermit") is None:
         return await edit_delete(event, f"**   يــجـب تـفـعـيـل امـر الحـمـايـة أولاً بـأرســال ** {cmdhd} الـحماية تشغيل  لـتـفـعـيـل هـذا الأمـر .⚠️❕")
@@ -628,7 +628,7 @@ async def unblock_pm(event):
         reason = "**  لـم يـذكـر 💭 **"
     await event.client(functions.contacts.UnblockRequest(user.id))
     await event.edit(f"[{user.first_name}](tg://user?id={user.id}) \n **   تـم الـغـاء حـظـره بـنـجـاح ،  يـمـكـنـه مـراسـلـتـك الان **\n**   الـسـبـب ❔ Ban has been successfully removed.  He can message you now ** {reason}")
-@O9937.on(admin_cmd(pattern="المقبولين(?: |$)(.*)"))
+@IQTHON.on(admin_cmd(pattern="المقبولين(?: |$)(.*)"))
 async def approve_p_m(event):
     if gvarstatus("pmpermit") is None:
         return await edit_delete(event,f"**   يــجـب تـفـعـيـل امـر الحـمـايـة أولاً بـأرســال ** {cmdhd} الـحماية تشغيل  لـتـفـعـيـل هـذا الأمـر .⚠️❕",)
@@ -639,4 +639,4 @@ async def approve_p_m(event):
             APPROVED_PMs += f"• 👤 {_format.mentionuser(user.first_name , user.user_id)}\n**   الأيــدي :** `{user.user_id}`\n**   الـمـعـرف:** @{user.username}\n**   الـتـاريـخ :** {user.date}\n**   الـسـبـب:** {user.reason}\n\n"
     else:
         APPROVED_PMs = "   لـم تـوافـق عـلـى أي شـخـص مـسـبـقـاً ⁉️"
-    await edit_or_reply(event, APPROVED_PMs, file_name="قائـمة الحـماية.txt", caption="  قـائـمـة الـمـسـمـوح لـهم الـحـالـيـة : 🔰 \n سـورس O9937 الـعربي \n @O9937")
+    await edit_or_reply(event, APPROVED_PMs, file_name="قائـمة الحـماية.txt", caption="  قـائـمـة الـمـسـمـوح لـهم الـحـالـيـة : 🔰 \n سـورس FFDUA  \n @FFDUA")

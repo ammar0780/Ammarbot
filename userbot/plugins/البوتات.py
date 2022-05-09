@@ -7,7 +7,7 @@ from telethon import events
 from asyncio.exceptions import TimeoutError
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.functions.messages import ExportChatInviteRequest
-from userbot import O9937
+from userbot import iqthon
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers import get_user_from_event, sanga_seperator
 from bs4 import BeautifulSoup
@@ -21,7 +21,7 @@ from barcode.writer import ImageWriter
 from bs4 import BeautifulSoup
 from PIL import Image, ImageColor
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-from userbot import O9937
+from userbot import iqthon
 from ..Config import Config
 from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
@@ -39,34 +39,34 @@ IQMOG = re.compile(
 def iqtfy(inputString: str) -> str:
     return re.sub(IQMOG, "", inputString)
 
-@O9937.on(admin_cmd(pattern="اكس او(?: |$)(.*)"))
-async def iq(O9937):
-    kn = O9937.pattern_match.group(1)
+@iqthon.on(admin_cmd(pattern="اكس او(?: |$)(.*)"))
+async def iq(iqthon):
+    kn = iqthon.pattern_match.group(1)
     if not kn:
-        if O9937.is_reply:
-            (await O9937.get_reply_message()).message
+        if iqthon.is_reply:
+            (await iqthon.get_reply_message()).message
 
             return
     LLL5L = await bot.inline_query("xobot", f"{(iqtfy(kn))}")
     await LLL5L[0].click(
-        O9937.chat_id,
-        reply_to=O9937.reply_to_msg_id,
-        silent=True if O9937.is_reply else False,
+        iqthon.chat_id,
+        reply_to=iqthon.reply_to_msg_id,
+        silent=True if iqthon.is_reply else False,
         hide_via=True)
-@O9937.on(admin_cmd(pattern="همسه ?(.*)"))
-async def iq(O9937):
-    if O9937.fwd_from:
+@iqthon.on(admin_cmd(pattern="همسه ?(.*)"))
+async def iq(iqthon):
+    if iqthon.fwd_from:
         return
-    kkno = O9937.pattern_match.group(1)
+    kkno = iqthon.pattern_match.group(1)
     donttag = "@whisperBot"
-    if O9937.reply_to_msg_id:
-        await O9937.get_reply_message()
+    if iqthon.reply_to_msg_id:
+        await iqthon.get_reply_message()
     l5 = await bot.inline_query(donttag, kkno)
-    await l5[0].click(O9937.chat_id)
-    await O9937.delete()
-@O9937.on(admin_cmd(pattern="حالتي ?(.*)"))
-async def iq(O9937):
-    await O9937.edit("جاري الفحص")
+    await l5[0].click(iqthon.chat_id)
+    await iqthon.delete()
+@iqthon.on(admin_cmd(pattern="حالتي ?(.*)"))
+async def iq(iqthon):
+    await iqthon.edit("جاري الفحص")
     async with bot.conversation("@SpamBot") as l5:
         try:
             dontTag = l5.wait_event(
@@ -75,16 +75,16 @@ async def iq(O9937):
             dontTag = await dontTag
             await bot.send_read_acknowledge(l5.chat_id)
         except YouBlockedUserError:
-            await O9937.edit("**قم بفك حظر @SpamBot للاكمال**")
+            await iqthon.edit("**قم بفك حظر @SpamBot للاكمال**")
             return
-        await O9937.edit(f"~ {dontTag.message.message}")    
-@O9937.on(admin_cmd(pattern="بي دي اف ?(.*)"))
-async def _(O9937):
-    if not O9937.reply_to_msg_id:
-        return await O9937.edit("**الرجاء الرد على أي نص**")
-    reply_message = await O9937.get_reply_message()
+        await iqthon.edit(f"~ {dontTag.message.message}")    
+@iqthon.on(admin_cmd(pattern="بي دي اف ?(.*)"))
+async def _(iqthon):
+    if not iqthon.reply_to_msg_id:
+        return await iqthon.edit("**الرجاء الرد على أي نص**")
+    reply_message = await iqthon.get_reply_message()
     chat = "@office2pdf_bot"
-    await O9937.edit("**جاري تحويل إلى PDF...**")
+    await iqthon.edit("**جاري تحويل إلى PDF...**")
     try:
         async with bot.conversation(chat) as conv:
             try:
@@ -95,15 +95,15 @@ async def _(O9937):
                 cnfrm = await conv.get_response()
                 editfilename = await conv.send_message("نعم")
                 enterfilename = await conv.get_response()
-                filename = await conv.send_message("O9937")
+                filename = await conv.send_message("IQTHON")
                 started = await conv.get_response()
                 pdf = await conv.get_response()
                 await bot.send_read_acknowledge(conv.chat_id)
             except YouBlockedUserError:
-                await O9937.edit("**قم بفك الحظر من البوت : @office2pdf_bot **")
+                await iqthon.edit("**قم بفك الحظر من البوت : @office2pdf_bot **")
                 return
-            await O9937.client.send_message(event.chat_id, pdf)
-            await O9937.client.delete_messages(                conv.chat_id,                [
+            await iqthon.client.send_message(event.chat_id, pdf)
+            await iqthon.client.delete_messages(                conv.chat_id,                [
                     msg_start.id,
                     response.id,
                     msg.id,
@@ -115,24 +115,24 @@ async def _(O9937):
                     pdf.id,
                     convert.id,
                 ],)
-            await O9937.delete()
+            await iqthon.delete()
     except TimeoutError:
-        return await O9937.edit("**هناك خطا نعتذر**") 
-@O9937.on(admin_cmd(pattern="بوتي$"))
+        return await iqthon.edit("**هناك خطا نعتذر**") 
+@iqthon.on(admin_cmd(pattern="بوتي$"))
 async def iq(iqbot):
     TG_BOT_USERNAME = Config.TG_BOT_USERNAME
-    await iqbot.reply(f"**بوت تليثون الخاص بك : {TG_BOT_USERNAME}**")
-@O9937.on(admin_cmd(pattern="ملصقي ?(.*)"))
-async def iq(O9937):
-    if O9937.fwd_from:
+    await iqbot.reply(f"**بوت مستقبل الخاص بك : {TG_BOT_USERNAME}**")
+@iqthon.on(admin_cmd(pattern="ملصقي ?(.*)"))
+async def iq(iqthon):
+    if iqthon.fwd_from:
         return
-    if not O9937.reply_to_msg_id:
-        await edit_delete(O9937, "**الرجاء الرد على الرسالة**")
+    if not iqthon.reply_to_msg_id:
+        await edit_delete(iqthon, "**الرجاء الرد على الرسالة**")
         return
-    reply_message = await O9937.get_reply_message()
-    warna = O9937.pattern_match.group(1)
+    reply_message = await iqthon.get_reply_message()
+    warna = iqthon.pattern_match.group(1)
     chat = "@QuotLyBot"
-    await edit_or_reply(O9937, "**جاري...**")
+    await edit_or_reply(iqthon, "**جاري...**")
     async with bot.conversation(chat) as conv:
         try:
             response = conv.wait_event(events.NewMessage(incoming=True, from_users=1031952739))
@@ -142,48 +142,48 @@ async def iq(O9937):
             second = await bot.forward_messages(chat, reply_message)
             response = await response
         except YouBlockedUserError:
-            await O9937.reply("**قم بفك الحظر من البوت : @QuotLyBot **")
+            await iqthon.reply("**قم بفك الحظر من البوت : @QuotLyBot **")
             return
         if response.text.startswith("Hi!"):
             await edit_or_reply(
-                O9937, "**الرجاء تعطيل إعادة توجيه إعدادات الخصوصية الخاصة بك**")
+                iqthon, "**الرجاء تعطيل إعادة توجيه إعدادات الخصوصية الخاصة بك**")
         else:
-            await O9937.delete()
-            await bot.forward_messages(O9937.chat_id, response.message)
+            await iqthon.delete()
+            await bot.forward_messages(iqthon.chat_id, response.message)
     await bot.delete_messages(conv.chat_id, [first.id, ok.id, second.id, response.id])
-@O9937.on(admin_cmd(pattern="اسم الاغنيه ?(.*)"))
-async def iq(O9937):
-    if not O9937.reply_to_msg_id:
-        return await O9937.edit("**الرجاء الرد على الرسالة**")
-    reply_message = await O9937.get_reply_message()
+@iqthon.on(admin_cmd(pattern="اسم الاغنيه ?(.*)"))
+async def iq(iqthon):
+    if not iqthon.reply_to_msg_id:
+        return await iqthon.edit("**الرجاء الرد على الرسالة**")
+    reply_message = await iqthon.get_reply_message()
     chat = "@auddbot"
     try:
-        async with O9937.client.conversation(chat) as conv:
+        async with iqthon.client.conversation(chat) as conv:
             try:
-                await O9937.edit("**التعرف على الأغاني...**")
+                await iqthon.edit("**التعرف على الأغاني...**")
                 start_msg = await conv.send_message("/start")
                 await conv.get_response()
                 send_audio = await conv.send_message(reply_message)
                 check = await conv.get_response()
                 if not check.text.startswith("Audio received"):
-                    return await O9937.edit(
+                    return await iqthon.edit(
                         "**حدث خطأ أثناء تحديد الأغنية. حاول استخدام رسالة صوتية تتراوح مدتها من 5 إلى 10 ثوانٍ.**")
-                await O9937.edit("**انتظر لحظة...**")
+                await iqthon.edit("**انتظر لحظة...**")
                 result = await conv.get_response()
-                await O9937.client.send_read_acknowledge(conv.chat_id)
+                await iqthon.client.send_read_acknowledge(conv.chat_id)
             except YouBlockedUserError:
-                await O9937.edit("**قم بفك الحظر من البوت : @auddbot dan coba lagi:")
+                await iqthon.edit("**قم بفك الحظر من البوت : @auddbot dan coba lagi:")
                 return
             namem = f"**إسم الأغنية : {result.text.splitlines()[0]}**\
         \n\n**تفاصيل : {result.text.splitlines()[2]}**"
-            await O9937.edit(namem)
-            await O9937.client.delete_messages(                conv.chat_id, [start_msg.id, send_audio.id, check.id, result.id]            )
+            await iqthon.edit(namem)
+            await iqthon.client.delete_messages(                conv.chat_id, [start_msg.id, send_audio.id, check.id, result.id]            )
     except TimeoutError:
-        return await O9937.edit(            "**هناك خطا نعتذر**")
-@O9937.on(admin_cmd(pattern="انشاء بريد(?: |$)(.*)"))
-async def _(O9937):
+        return await iqthon.edit(            "**هناك خطا نعتذر**")
+@iqthon.on(admin_cmd(pattern="انشاء بريد(?: |$)(.*)"))
+async def _(iqthon):
     chat = "@TempMailBot"
-    geez = await O9937.edit("**جاري انشاء بريد ...**")
+    geez = await iqthon.edit("**جاري انشاء بريد ...**")
     async with bot.conversation(chat) as conv:
         try:
             response = conv.wait_event(events.NewMessage(                incoming=True,                from_users=220112646            )            )            
@@ -191,29 +191,29 @@ async def _(O9937):
             await asyncio.sleep(1)
             await conv.send_message("/create")
             response = await response
-            O9937bot = ((response).reply_markup.rows[2].buttons[0].url)
-            await O9937.client.send_read_acknowledge(conv.chat_id)
+            iqthonbot = ((response).reply_markup.rows[2].buttons[0].url)
+            await iqthon.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
             await geez.edit("**قم بفتح الحظر عن : @TempMailBot للأستمرار بانشاء البريدات**")
             return
-        await O9937.edit(f"بريدك الخاص هوه : ~ `{response.message.message}`\n[انقر هنا للتحقق من رسائل بريدك]({O9937bot})")
-@O9937.on(admin_cmd(pattern="سجل الاسماء(ألف)?(?:\s|$)([\s\S]*)"))
-async def _(O9937):  # sourcery no-metrics
-    input_str = "".join(O9937.text.split(maxsplit=1)[1:])
-    reply_message = await O9937.get_reply_message()
+        await iqthon.edit(f"بريدك الخاص هوه : ~ `{response.message.message}`\n[انقر هنا للتحقق من رسائل بريدك]({iqthonbot})")
+@iqthon.on(admin_cmd(pattern="سجل الاسماء(ألف)?(?:\s|$)([\s\S]*)"))
+async def _(iqthon):  # sourcery no-metrics
+    input_str = "".join(iqthon.text.split(maxsplit=1)[1:])
+    reply_message = await iqthon.get_reply_message()
     if not input_str and not reply_message:
-        await edit_delete(O9937, "**⎈ ⦙ قم بالـرد على رسالـة لمستخـدم للحصـول على إسمـه/سجل يوزراتـه أو قم بإعطـاء آيـدي المستخـدم/يـوزر المستخـدم ✦**")
-    user, rank = await get_user_from_event(O9937, secondgroup=True)
+        await edit_delete(iqthon, "**⎈ ⦙ قم بالـرد على رسالـة لمستخـدم للحصـول على إسمـه/سجل يوزراتـه أو قم بإعطـاء آيـدي المستخـدم/يـوزر المستخـدم ✦**")
+    user, rank = await get_user_from_event(iqthon, secondgroup=True)
     if not user:
         return
     uid = user.id
     chat = "@SangMataInfo_bot"
-    iqevent = await edit_or_reply(O9937, "**⎈ ⦙ جـاري المعالجـة ↯**")
-    async with O9937.client.conversation(chat) as conv:
+    iqevent = await edit_or_reply(iqthon, "**⎈ ⦙ جـاري المعالجـة ↯**")
+    async with iqthon.client.conversation(chat) as conv:
         try:
             await conv.send_message(f"/search_id {uid}")
         except YouBlockedUserError:
-            await edit_delete(O9937, "**⎈ ⦙ قم بإلغـاء حظـر @Sangmatainfo_bot ثم حـاول !!**")
+            await edit_delete(iqthon, "**⎈ ⦙ قم بإلغـاء حظـر @Sangmatainfo_bot ثم حـاول !!**")
         responses = []
         while True:
             try:
@@ -221,38 +221,38 @@ async def _(O9937):  # sourcery no-metrics
             except asyncio.TimeoutError:
                 break
             responses.append(response.text)
-        await O9937.client.send_read_acknowledge(conv.chat_id)
+        await iqthon.client.send_read_acknowledge(conv.chat_id)
     if not responses:
-        await edit_delete(O9937, "**⎈ ⦙ لا يستطيـع البـوت جلـب النتائـج ⚠️**")
+        await edit_delete(iqthon, "**⎈ ⦙ لا يستطيـع البـوت جلـب النتائـج ⚠️**")
     if "No records found" in responses:
-        await edit_delete(O9937, "**⎈ ⦙ المستخـدم ليـس لديـه أيّ سجـل ✕**")
+        await edit_delete(iqthon, "**⎈ ⦙ المستخـدم ليـس لديـه أيّ سجـل ✕**")
     names, usernames = await sanga_seperator(responses)
-    cmd = O9937.pattern_match.group(1)
+    cmd = iqthon.pattern_match.group(1)
     sandy = None
     check = usernames if cmd == "u" else names
     for i in check:
         if sandy:
-            await O9937.reply(i, parse_mode=_format.parse_pre)
+            await iqthon.reply(i, parse_mode=_format.parse_pre)
         else:
             sandy = True
             await iqevent.edit(i, parse_mode=_format.parse_pre)
-@O9937.on(admin_cmd(pattern="تيك توك(?: |$)(.*)"))
-async def _(O9937):
-    reply_message = await O9937.get_reply_message()
+@iqthon.on(admin_cmd(pattern="تيك توك(?: |$)(.*)"))
+async def _(iqthon):
+    reply_message = await iqthon.get_reply_message()
     if not reply_message:
-        await edit_or_reply(O9937, "**⎈ ⦙  الرد على الرابط.**")
+        await edit_or_reply(iqthon, "**⎈ ⦙  الرد على الرابط.**")
         return
     if not reply_message.text:
-        await edit_or_reply(O9937, "**⎈ ⦙  الرد على الرابط.**")
+        await edit_or_reply(iqthon, "**⎈ ⦙  الرد على الرابط.**")
         return
     chat = "@fs0bot"
-    iqevent = await edit_or_reply(O9937, "**⎈ ⦙  جاري تحميل الرابط**")
-    async with O9937.client.conversation(chat) as conv:
+    iqevent = await edit_or_reply(iqthon, "**⎈ ⦙  جاري تحميل الرابط**")
+    async with iqthon.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(events.NewMessage(incoming=True, from_users=1354606430))
-            await O9937.client.forward_messages(chat, reply_message)
+            await iqthon.client.forward_messages(chat, reply_message)
             response = await response
-            await O9937.client.send_read_acknowledge(conv.chat_id)
+            await iqthon.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
             await iqevent.edit("**⎈ ⦙  فك الحظر من البوت : @fs0bot**")
             return
@@ -260,8 +260,8 @@ async def _(O9937):
             await iqevent.edit("?")
         else:
             await iqevent.delete()
-            await O9937.client.send_message(O9937.chat_id, response.message)
-@O9937.on(admin_cmd(pattern="زخرفه_عربي ?(.*)"))
+            await iqthon.client.send_message(iqthon.chat_id, response.message)
+@iqthon.on(admin_cmd(pattern="زخرفه_عربي ?(.*)"))
 async def _(event):
     input_str = event.pattern_match.group(1)
     reply_to_id = await reply_id(event)
@@ -285,7 +285,7 @@ async def _(event):
         else:
             await catevent.delete()
             await event.client.send_message(event.chat_id, response.message)
-@O9937.on(admin_cmd(pattern="زخرفه_انكليزي ?(.*)"))
+@iqthon.on(admin_cmd(pattern="زخرفه_انكليزي ?(.*)"))
 async def _(event):
     input_str = event.pattern_match.group(1)
     reply_to_id = await reply_id(event)
@@ -309,82 +309,82 @@ async def _(event):
         else:
             await catevent.delete()
             await event.client.send_message(event.chat_id, response.message)
-@O9937.on(admin_cmd(pattern="انستا (.*)"))
-async def iq(O9937insta):
+@iqthon.on(admin_cmd(pattern="انستا (.*)"))
+async def iq(iqthoninsta):
     chat = "@instasavegrambot"
-    link = O9937insta.pattern_match.group(1)
+    link = iqthoninsta.pattern_match.group(1)
     if "www.instagram.com" not in link:
-        await edit_or_reply(O9937insta, "يجب كتابة رابط")
+        await edit_or_reply(iqthoninsta, "يجب كتابة رابط")
     else:
         start = datetime.now()
-        iqevent = await edit_or_reply(O9937insta, "جار التحميل  🔍")
-    async with O9937insta.client.conversation(chat) as knov:
+        iqevent = await edit_or_reply(iqthoninsta, "جار التحميل  🔍")
+    async with iqthoninsta.client.conversation(chat) as knov:
         try:
             msg_start = await knov.send_message("/start")
             response = await knov.get_response()
             msg = await knov.send_message(link)
             video = await knov.get_response()
             details = await knov.get_response()
-            await O9937insta.client.send_read_acknowledge(knov.chat_id)
+            await iqthoninsta.client.send_read_acknowledge(knov.chat_id)
         except YouBlockedUserError:
             await iqevent.edit("بفتح الحظر  @instasavegrambot")
             return
         await iqevent.delete()
-        l5 = await O9937insta.client.send_file(O9937insta.chat_id, video)
+        l5 = await iqthoninsta.client.send_file(iqthoninsta.chat_id, video)
         end = datetime.now()
         (end - start).seconds
         await l5.edit(f"تم تنزيل", parse_mode="html")
-    await O9937insta.client.delete_messages(knov.chat_id, [msg_start.id, response.id, msg.id, video.id, details.id])
-@O9937.on(admin_cmd(pattern="هديه ?(.*)"))
-async def iq(O9937):
-    kkno = O9937.pattern_match.group(1)
+    await iqthoninsta.client.delete_messages(knov.chat_id, [msg_start.id, response.id, msg.id, video.id, details.id])
+@iqthon.on(admin_cmd(pattern="هديه ?(.*)"))
+async def iq(iqthon):
+    kkno = iqthon.pattern_match.group(1)
     donttag = "@i4bot"
-    if O9937.reply_to_msg_id:
-        await O9937.get_reply_message()
+    if iqthon.reply_to_msg_id:
+        await iqthon.get_reply_message()
     l5 = await bot.inline_query(donttag, kkno)
-    await l5[0].click(O9937.chat_id)
-    await O9937.delete()
-@O9937.on(admin_cmd(pattern="كشف الفايروسات( -i)?$"))    
-async def _IQ(O9937):
-    input_str = O9937.pattern_match.group(1)
-    if not O9937.reply_to_msg_id:
-        return await edit_or_reply(O9937, "الرد على أي رسالة مستخدم.")
-    reply_message = await O9937.get_reply_message()
+    await l5[0].click(iqthon.chat_id)
+    await iqthon.delete()
+@iqthon.on(admin_cmd(pattern="كشف الفايروسات( -i)?$"))    
+async def _IQ(iqthon):
+    input_str = iqthon.pattern_match.group(1)
+    if not iqthon.reply_to_msg_id:
+        return await edit_or_reply(iqthon, "الرد على أي رسالة مستخدم.")
+    reply_message = await iqthon.get_reply_message()
     if not reply_message.media:
-        return await edit_or_reply(O9937, "الرد على الملف")
+        return await edit_or_reply(iqthon, "الرد على الملف")
     chat = "@VS_Robot"
-    IQevent = await edit_or_reply(O9937, " انتضر قليلا")
-    async with O9937.client.conversation(chat) as conv:
+    IQevent = await edit_or_reply(iqthon, " انتضر قليلا")
+    async with iqthon.client.conversation(chat) as conv:
         try:
             await conv.send_message("/start")
             await conv.get_response()
-            await O9937.client.forward_messages(chat, reply_message)
+            await iqthon.client.forward_messages(chat, reply_message)
             response1 = await conv.get_response()
             if response1.text:
-                await O9937.client.send_read_acknowledge(conv.chat_id)
+                await iqthon.client.send_read_acknowledge(conv.chat_id)
                 return await IQevent.edit(response1.text, parse_mode=_format.parse_pre)
             await conv.get_response()
-            await O9937.client.send_read_acknowledge(conv.chat_id)
+            await iqthon.client.send_read_acknowledge(conv.chat_id)
             response3 = await conv.get_response()
             response4 = await conv.get_response()
-            await O9937.client.send_read_acknowledge(conv.chat_id)
+            await iqthon.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
             return await IQevent.edit("قم بفتح الحظر من : @VS_Robot")
         if not input_str:
             return await edit_or_reply(IQevent, response4.text)
         await IQevent.delete()
-        await O9937.client.send_file(O9937.chat_id, response3.media, reply_to=(await reply_id(O9937)))
-@O9937.on(admin_cmd(pattern="تقويم ([\s\S]*)"))    
-async def _iq(O9937):
-    input_str = O9937.pattern_match.group(1)
+        await iqthon.client.send_file(iqthon.chat_id, response3.media, reply_to=(await reply_id(iqthon)))
+@iqthon.on(admin_cmd(pattern="تقويم ([\s\S]*)"))    
+async def _iq(iqthon):
+    input_str = iqthon.pattern_match.group(1)
     input_sgra = input_str.split(" ")
     if len(input_sgra) != 2:
-        return await edit_delete(O9937, "**تصحيح قم بكتابه الأمر هكذا : **`.تقويم السنه الشهر `", 5)
+        return await edit_delete(iqthon, "**تصحيح قم بكتابه الأمر هكذا : **`.تقويم السنه الشهر `", 5)
 
     yyyy = input_sgra[0]
     mm = input_sgra[1]
     try:
         output_result = calendar.month(int(yyyy.strip()), int(mm.strip()))
-        await edit_or_reply(O9937, f"```{output_result}```")
+        await edit_or_reply(iqthon, f"```{output_result}```")
     except Exception as e:
-        await edit_delete(O9937, f"                                              **خطأ :**\n`{str(e)}`                       ", 5)
+        await edit_delete(iqthon, f"                                              **خطأ :**\n`{str(e)}`                       ", 5)

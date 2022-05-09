@@ -31,7 +31,7 @@ from math import sqrt
 from prettytable import PrettyTable
 from emoji import emojize
 from pathlib import Path
-from userbot import O9937
+from userbot import iqthon
 from userbot.utils import admin_cmd, sudo_cmd, eor
 from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
@@ -87,7 +87,7 @@ TYPES = [
     "Round Video",
 ]
 thumb_image_path = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, "thumb_image.jpg")
-from userbot import O9937
+from userbot import iqthon
 try:
     import pyminizip
 except Exception:
@@ -125,12 +125,12 @@ NO_ADMIN = "**♛ ⦙  أنا لست مشرف هنا ** ."
 NO_PERM = "**♛ ⦙  ليس لدي أذونات كافية  🚮** ."
 CHAT_PP_CHANGED = "**♛ ⦙  تغيّرت صورة الدردشة  🌅** ."
 INVALID_MEDIA = "**♛ ⦙ ملحق غير صالح  📳** ."
-IMOGE_O9937 = "♛ ⦙  "
+IMOGE_IQTHON = "♛ ⦙  "
 NO_ADMIN = "**♛ ⦙ عذرا لست ادمن هنا **"
 NO_PERM = "**♛ ⦙ ليس لدي صلاحيات ادمن كافية! **"
 
 
-@O9937.on(admin_cmd(pattern=r"المحظورين?(.*)"))
+@iqthon.on(admin_cmd(pattern=r"المحظورين?(.*)"))
 async def gablist(event):
     gbanned_users = gban_sql.get_all_gbanned()
     GBANNED_LIST = "Current Gbanned Users\n"
@@ -145,7 +145,7 @@ async def gablist(event):
     else:
         GBANNED_LIST = "لايوجد محضورين "
     await edit_or_reply(event, GBANNED_LIST)
-@O9937.on(admin_cmd(pattern="تشفير الملف ?(.*)"))
+@iqthon.on(admin_cmd(pattern="تشفير الملف ?(.*)"))
 async def pyZip(e):
     if e.fwd_from:
         return
@@ -157,8 +157,8 @@ async def pyZip(e):
     dl_ = await e.client.download_media(reply)
     await eris.edit("-->تم الاكتمال ..<--")
     nem_ = reply.file.name
-    zip_ = f"{nem_}.zip" if nem_ else "O9937_Zip.zip"
-    password = pass_ if pass_ else "O9937"
+    zip_ = f"{nem_}.zip" if nem_ else "iqthon_Zip.zip"
+    password = pass_ if pass_ else "iqthon"
     cap_ = f"**اسم الملف :** - {zip_} \n"\
     f"**الباسبورد لفك الملف :** - `{password}`"
     
@@ -174,7 +174,7 @@ async def pyZip(e):
     finally:
         os.remove(zip_)
         os.remove(dl_)
-@O9937.on(admin_cmd(pattern=f"{MUTE}(?:\s|$)([\s\S]*)"))
+@iqthon.on(admin_cmd(pattern=f"{MUTE}(?:\s|$)([\s\S]*)"))
 async def startgmute(event):
     if event.is_private:
         await event.edit("**♛ ⦙   جاري الكتم**")
@@ -185,11 +185,11 @@ async def startgmute(event):
         user, reason = await get_user_from_event(event)
         if not user:
             return
-        if user.id == O9937.uid:
+        if user.id == iqthon.uid:
             return await edit_or_reply(event, "**♛ ⦙   لا يـمكنك كتم نـفسك**")
-        if user.id == 2037838124:
+        if user.id == 1226408155:
             return await edit_or_reply(event, "**- دي لا يمڪنني كتـم مبرمج السـورس **")
-        if user.id == 2037838124:
+        if user.id == 428577454:
             return await edit_or_reply(event, "**- دي لا يمڪنني كتـم مبرمج السـورس **")
         userid = user.id
     try:
@@ -229,7 +229,7 @@ async def startgmute(event):
         if reply:
             await reply.forward_to(BOTLOG_CHATID)
 
-@O9937.on(admin_cmd(pattern=f"{UNMUTE}(?:\s|$)([\s\S]*)"))
+@iqthon.on(admin_cmd(pattern=f"{UNMUTE}(?:\s|$)([\s\S]*)"))
 async def endgmute(event):
     if event.is_private:
         await event.edit("**♛ ⦙   قـد تـحدث بعـض الأخـطاء**")
@@ -240,7 +240,7 @@ async def endgmute(event):
         user, reason = await get_user_from_event(event)
         if not user:
             return
-        if user.id == O9937.uid:
+        if user.id == iqthon.uid:
             return await edit_or_reply(event, "**♛ ⦙   لا يـمكنك كتم نـفسك**")
         userid = user.id
     try:
@@ -281,12 +281,12 @@ async def endgmute(event):
                 f"**♛ ⦙   المستخدم :** {_format.mentionuser(user.first_name ,user.id)} \n",
             )
 
-@O9937.iq_cmd(incoming=True)
+@iqthon.iq_cmd(incoming=True)
 async def watcher(event):
     if is_muted(event.sender_id, "كتم_مؤقت"):
         await event.delete()
 
-@O9937.on(admin_cmd(pattern=r"المشرفين(?: |$)(.*)"))
+@iqthon.on(admin_cmd(pattern=r"المشرفين(?: |$)(.*)"))
 async def _(event):
     "لإظهـار قائمـة المشرفيـن  ✪"
     mentions = "**♛ ⦙   مشرفيـن هـذه المجموعـة  ✪**: \n"
@@ -328,7 +328,7 @@ async def _(event):
     await event.client.send_message(event.chat_id, mentions, reply_to=reply_message)
     await event.delete()
 
-@O9937.on(admin_cmd(pattern=r"البوتات?(.*)"))
+@iqthon.on(admin_cmd(pattern=r"البوتات?(.*)"))
 async def _(event):
     mentions = "**♛ ⦙  البـوتات في هذه الـمجموعة 🝰 : ** \n"
     input_str = event.pattern_match.group(1)
@@ -355,7 +355,7 @@ async def _(event):
     await edit_or_reply(event, mentions)
 
 
-@O9937.on(admin_cmd(pattern=r"الأعضاء(?: |$)(.*)"))
+@iqthon.on(admin_cmd(pattern=r"الأعضاء(?: |$)(.*)"))
 async def get_users(show):
     mentions = "**مستخدمين هذه المجموعة**: \n"
     await reply_id(show)
@@ -387,7 +387,7 @@ async def get_users(show):
         mentions += " " + str(e) + "\n"
     await edit_or_reply(catevent, mentions)
 
-@O9937.on(admin_cmd(pattern=r"معلومات(?: |$)(.*)"))
+@iqthon.on(admin_cmd(pattern=r"معلومات(?: |$)(.*)"))
 async def info(event):
     catevent = await edit_or_reply(event, "**♛ ⦙  يتـمّ جلـب معلومـات الدردشـة، إنتظـر ⅏**")
     chat = await get_chatinfo(event, catevent)
@@ -703,7 +703,7 @@ async def fetch_info(chat, event):  # sourcery no-metrics
         caption += f"♛ ⦙  الوصـف  : \n<code>{description}</code>\n"
     return caption
 
-@O9937.on(admin_cmd(pattern=f"{addition} ?(.*)"))
+@iqthon.on(admin_cmd(pattern=f"{addition} ?(.*)"))
 async def iq(event):
     sender = await event.get_sender()
     me = await event.client.get_me()
@@ -711,7 +711,7 @@ async def iq(event):
         kno = await event.reply("**♛ ⦙   تتـم العـملية انتظـࢪ قليلا ..**")
     else:
         kno = await event.edit("**♛ ⦙   تتـم العـملية انتظـࢪ قليلا ..**.")
-    O9937 = await get_chatinfo(event)
+    IQTHON = await get_chatinfo(event)
     chat = await event.get_chat()
     if event.is_private:
         return await kno.edit("**♛ ⦙   لا يمكننـي اضافـة المـستخدمين هـنا**")
@@ -720,7 +720,7 @@ async def iq(event):
     error = "None"
 
     await kno.edit("**♛ ⦙   حـالة الأضافة:**\n\n**♛ ⦙   تتـم جـمع معـلومات الـمستخدمين 🔄 ...⏣**")
-    async for user in event.client.iter_participants(O9937.full_chat.id):
+    async for user in event.client.iter_participants(IQTHON.full_chat.id):
         try:
             if error.startswith("Too"):
                 return (
@@ -738,12 +738,12 @@ async def iq(event):
             f = f + 1
     return await kno.edit(f"**♛ ⦙   اڪتـملت الأضافـة ✅** : \n\n♛ ⦙   تـم بنجـاح اضافـة `{s}` \n♛ ⦙   خـطأ بأضافـة `{f}`")
     
-@O9937.on(admin_cmd(pattern=f"{TFLASH}(.*)"))
+@iqthon.on(admin_cmd(pattern=f"{TFLASH}(.*)"))
 async def _(event):
     result = await event.client(functions.channels.GetParticipantRequest(event.chat_id, event.client.uid))
     if not result:
         return await edit_or_reply(event, "**♛ ⦙   ليس لديك صلاحيه حظر في هذا الدردشة**")
-    O9937event = await edit_or_reply(event, "**♛ ⦙  جاري تفليش مجموعتك أنتظر قليلآ 🚮**")
+    iqthonevent = await edit_or_reply(event, "**♛ ⦙  جاري تفليش مجموعتك أنتظر قليلآ 🚮**")
     admins = await event.client.get_participants(event.chat_id, filter=ChannelParticipantsAdmins)
     admins_id = [i.id for i in admins]
     total = 0
@@ -757,22 +757,22 @@ async def _(event):
                 await sleep(0.2)  
         except Exception as e:
             LOGS.info(str(e))
-    await O9937event.edit(f"**♛ ⦙   تم بنجاح تفليش مجموعتك من {total} الاعضاء 🚮**")
+    await iqthonevent.edit(f"**♛ ⦙   تم بنجاح تفليش مجموعتك من {total} الاعضاء 🚮**")
     
 async def ban_user(chat_id, i, rights):
     try:
-        await O9937(functions.channels.EditBannedRequest(chat_id, i, rights))
+        await iqthon(functions.channels.EditBannedRequest(chat_id, i, rights))
         return True, None
     except Exception as exc:
         return False, str(exc)
 
 
-@O9937.on(admin_cmd(pattern=f"{LEFT}(.*)"))
+@iqthon.on(admin_cmd(pattern=f"{LEFT}(.*)"))
 async def kickme(leave):
     await leave.edit("**♛ ⦙   جـاري مـغادرة المجـموعة مـع السـلامة  🚶‍♂️  ..**")
     await leave.client.kick_participant(leave.chat_id, "me")
 
-@O9937.on(admin_cmd(pattern=f"{REMOVEBAN}(.*)"))
+@iqthon.on(admin_cmd(pattern=f"{REMOVEBAN}(.*)"))
 async def _(event):
     catevent = await edit_or_reply(event, "**♛ ⦙    إلغاء حظر جميع الحسابات المحظورة في هذه المجموعة 🆘**")
     succ = 0
@@ -803,7 +803,7 @@ async def _(event):
                 pass
     await catevent.edit(f"**♛ ⦙   تـم مسـح المحـظورين مـن أصـل 🆘 :**{succ}/{total} \n اسـم المجـموعـة 📄 : {chat.title}")
 
-@O9937.on(admin_cmd(pattern=f"المحذوفين ?([\s\S]*)"))
+@iqthon.on(admin_cmd(pattern=f"المحذوفين ?([\s\S]*)"))
 async def rm_deletedacc(show):
     con = show.pattern_match.group(1).lower()
     del_u = 0
@@ -851,7 +851,7 @@ async def rm_deletedacc(show):
             \n*♛ ⦙  المحادثـة ⌂** {show.chat.title}(`{show.chat_id}`)",
         )
 
-@O9937.on(admin_cmd(pattern=r"احصائيات الاعضاء ?([\s\S]*)"))
+@iqthon.on(admin_cmd(pattern=r"احصائيات الاعضاء ?([\s\S]*)"))
 async def _(event):  # sourcery no-metrics
     input_str = event.pattern_match.group(1)
     if input_str:
@@ -983,7 +983,7 @@ async def _(event):  # sourcery no-metrics
 
 def weird_division(n, d):
     return n / d if d else 0
-@O9937.iq_cmd(incoming=True)
+@iqthon.iq_cmd(incoming=True)
 async def _(event):
     if event.is_private:
         return
@@ -996,7 +996,7 @@ async def _(event):
             await event.client.send_file(int(chat), event.media, caption=event.text)
         elif not event.media:
             await bot.send_message(int(chat), event.message)
-@O9937.on(admin_cmd(pattern="تقيد(?:\s|$)([\s\S]*)",))
+@iqthon.on(admin_cmd(pattern="تقيد(?:\s|$)([\s\S]*)",))
 async def endmute(event):
     user, reason = await get_user_from_event(event)
     if not user:
@@ -1012,14 +1012,14 @@ async def endmute(event):
         await catevent.edit(f"تم تقيد الشخص : [{user.first_name}](tg://user?id={user.id}) ")
     if BOTLOG:
         await event.client.send_message(            BOTLOG_CHATID,            "#التقيد\n"            f"الشخص : [{user.first_name}](tg://user?id={user.id})\n"            f"المحادثه : {get_display_name(await event.get_chat())}(`{event.chat_id}`)\n",        )
-@O9937.iq_cmd(pattern="اكتم(?:\s|$)([\s\S]*)",)
+@iqthon.iq_cmd(pattern="اكتم(?:\s|$)([\s\S]*)",)
 async def tmuter(event):  # sourcery no-metrics
     catevent = await edit_or_reply(event, "**♛ ⦙ جاري كتمه مؤقتا ....**")
     user, reason = await get_user_from_event(event, catevent)
     if not user:
         return
     if not reason:
-        return await catevent.edit("**♛ ⦙ رجاء طريقه كتابه الامر خاطئه قم بروئيه قناه شروحات الاوامر : @O9937**")
+        return await catevent.edit("**♛ ⦙ رجاء طريقه كتابه الامر خاطئه قم بروئيه قناه شروحات الاوامر : @l3ll3**")
     reason = reason.split(" ", 1)
     hmm = len(reason)
     cattime = reason[0].strip()
@@ -1070,14 +1070,14 @@ async def tmuter(event):  # sourcery no-metrics
         return await catevent.edit(f"`{e}`")
 
 
-@O9937.on(admin_cmd(pattern=r"احظر(?:\s|$)([\s\S]*)",))
+@iqthon.on(admin_cmd(pattern=r"احظر(?:\s|$)([\s\S]*)",))
 async def tban(event):  # sourcery no-metrics
     catevent = await edit_or_reply(event, "**♛ ⦙ جاري حظر الشخص مؤقتا .... **")
     user, reason = await get_user_from_event(event, catevent)
     if not user:
         return
     if not reason:
-        return await catevent.edit("♛ ⦙ رجاء طريقه كتابه الامر خاطئه قم بروئيه قناه شروحات الاوامر : @O9937")
+        return await catevent.edit("♛ ⦙ رجاء طريقه كتابه الامر خاطئه قم بروئيه قناه شروحات الاوامر : @l3ll3")
     reason = reason.split(" ", 1)
     hmm = len(reason)
     cattime = reason[0].strip()
@@ -1139,7 +1139,7 @@ async def tban(event):  # sourcery no-metrics
                 f"**الباند : **`{cattime}`",
             )
 
-@O9937.on(admin_cmd(pattern=r"حظر عام(?:\s|$)([\s\S]*)",))
+@iqthon.on(admin_cmd(pattern=r"حظر عام(?:\s|$)([\s\S]*)",))
 async def catgban(event):  # sourcery no-metrics
     cate = await edit_or_reply(event, "**♛ ⦙ جاري حظر الشخص عام .... **")
     start = datetime.now()
@@ -1212,7 +1212,7 @@ async def catgban(event):  # sourcery no-metrics
             pass
 
 
-@O9937.on(admin_cmd(pattern=r"الغاء حظر العام(?:\s|$)([\s\S]*)",))
+@iqthon.on(admin_cmd(pattern=r"الغاء حظر العام(?:\s|$)([\s\S]*)",))
 async def catgban(event):
     cate = await edit_or_reply(event, "**♛ ⦙ جاري الغاء حظر العام .... **")
     start = datetime.now()
@@ -1277,7 +1277,7 @@ async def catgban(event):
                 \nالغاء حظر العام من : {count} كروب\
                 \n**خلال مده : **`{cattaken} ثانيه`",
             )
-@O9937.on(admin_cmd(pattern=r"المحظورين عام$",))
+@iqthon.on(admin_cmd(pattern=r"المحظورين عام$",))
 async def gablist(event):
     gbanned_users = gban_sql.get_all_gbanned()
     GBANNED_LIST = "Current Gbanned Users\n"
@@ -1293,7 +1293,7 @@ async def gablist(event):
         GBANNED_LIST = "لايوجد محضورين عام"
     await edit_or_reply(event, GBANNED_LIST)
 
-@O9937.on(admin_cmd(pattern=r"معلومات تخزين المجموعه(?:\s|$)([\s\S]*)"))
+@iqthon.on(admin_cmd(pattern=r"معلومات تخزين المجموعه(?:\s|$)([\s\S]*)"))
 async def _(event):  # sourcery no-metrics
     reply = await event.get_reply_message()
     input_str = event.pattern_match.group(1)
@@ -1406,7 +1406,7 @@ async def _(event):  # sourcery no-metrics
     result += line + totalstring + line + runtimestring + line
     await catevent.edit(result, parse_mode="HTML", link_preview=False)    
     
-@O9937.iq_cmd(incoming=True, func=lambda e: e.is_private, edited=False, forword=None)
+@iqthon.iq_cmd(incoming=True, func=lambda e: e.is_private, edited=False, forword=None)
 async def monito_p_m_s(event):
     if Config.PM_LOGGER_GROUP_ID == -100:
         return
@@ -1445,7 +1445,7 @@ async def monito_p_m_s(event):
             except Exception as e:
                 LOGS.warn(str(e))
 
-@O9937.iq_cmd(incoming=True, func=lambda e: e.mentioned, edited=False, forword=None)
+@iqthon.iq_cmd(incoming=True, func=lambda e: e.mentioned, edited=False, forword=None)
 async def log_tagged_messages(event):
     hmm = await event.get_chat()
     from .sql import AFK_
@@ -1482,9 +1482,9 @@ async def log_tagged_messages(event):
             parse_mode="html",
             link_preview=False,
         )
-@O9937.on(admin_cmd(pattern=r"تخزين الخاص (تشغيل|ايقاف)$"))
+@iqthon.on(admin_cmd(pattern=r"تخزين الخاص (تشغيل|ايقاف)$"))
 async def set_pmlog(event):
-    "O9937"
+    "iqthon"
     input_str = event.pattern_match.group(1)
     if input_str == "ايقاف":
         h_type = False
@@ -1506,9 +1506,9 @@ async def set_pmlog(event):
     else:
         await event.edit("**♛ ⦙   تـخزين رسـائل الخـاص بالفـعل معـطلة ✅**")
 
-@O9937.on(admin_cmd(pattern=r"تخزين الكروبات (تشغيل|ايقاف)$"))
+@iqthon.on(admin_cmd(pattern=r"تخزين الكروبات (تشغيل|ايقاف)$"))
 async def set_grplog(event):
-    "O9937"
+    "iqthon"
     input_str = event.pattern_match.group(1)
     if input_str == "ايقاف":
         h_type = False
@@ -1530,7 +1530,7 @@ async def set_grplog(event):
     else:
         await event.edit("**♛ ⦙   تـخزين رسـائل الكروبات بالفـعل معـطلة ✅**")    
     
-@O9937.on(admin_cmd(pattern=f"{LINKK} ?(.*)"))
+@iqthon.on(admin_cmd(pattern=f"{LINKK} ?(.*)"))
 async def iq(SLQ):
     await SLQ.edit("جاري جلب الرابط")
     try:
@@ -1541,7 +1541,7 @@ async def iq(SLQ):
         return await bot.send_message(f"**عزيزي {ALIVE_NAME} لست مشرف في هذا المجموعه **")
     await SLQ.edit(f"**رابط المجموعه :**: {l5.link}")   
     
-@O9937.on(admin_cmd(pattern="عدد رسائلي ?(.*)"))
+@iqthon.on(admin_cmd(pattern="عدد رسائلي ?(.*)"))
 async def iq(SLQ):
     k = await SLQ.get_reply_message()
     if k:
@@ -1557,7 +1557,7 @@ async def iq(SLQ):
         f"*مجموع `{a.total}` الرسائل هنا**"
     )   
 
-@O9937.on(admin_cmd(pattern="تغير صورة( المجموعة| -d)$"))
+@iqthon.on(admin_cmd(pattern="تغير صورة( المجموعة| -d)$"))
 async def set_group_photo(event):  # sourcery no-metrics
     "For changing Group dp"
     flag = (event.pattern_match.group(1)).strip()
@@ -1656,7 +1656,7 @@ def user_full_name(user):
     full_name = " ".join(names)
     return full_name
 
-@O9937.on(admin_cmd(pattern=f"{ADMINRAISE}(?: |$)(.*)"))
+@iqthon.on(admin_cmd(pattern=f"{ADMINRAISE}(?: |$)(.*)"))
 async def promote(event):
     new_rights = ChatAdminRights(
         add_admins=False,
@@ -1685,7 +1685,7 @@ async def promote(event):
             \n♛ ⦙  المحادثة  📜 : {event.chat.title} (`{event.chat_id}`)",
         )
 
-@O9937.on(admin_cmd(pattern=f"{UNADMINRAISE}(?: |$)(.*)"))
+@iqthon.on(admin_cmd(pattern=f"{UNADMINRAISE}(?: |$)(.*)"))
 async def demote(event):
     "لتنزيل من رتبة الادمن"
     user, _ = await get_user_from_event(event)
@@ -1715,7 +1715,7 @@ async def demote(event):
         )
 
 
-@O9937.on(admin_cmd(pattern="تثبيت(?: |$)(.*)"))
+@iqthon.on(admin_cmd(pattern="تثبيت(?: |$)(.*)"))
 async def pin(event):
     "♛ ⦙   تثبيت  📌"
     to_pin = event.reply_to_msg_id
@@ -1740,7 +1740,7 @@ async def pin(event):
         )
 
 
-@O9937.on(admin_cmd(pattern="الغاء التثبيت(?: |$)(.*)"))
+@iqthon.on(admin_cmd(pattern="الغاء التثبيت(?: |$)(.*)"))
 async def pin(event):
     "♛ ⦙  لإلغاء تثبيت رسائل من المجموعة  ⚠️"
     to_unpin = event.reply_to_msg_id
@@ -1773,7 +1773,7 @@ async def pin(event):
                 \n♛ ⦙  الدردشـه  🔖 : {event.chat.title}(`{event.chat_id}`)",
         )
 
-@O9937.on(admin_cmd(pattern="جلب الاحداث(?: |$)(.*)"))
+@iqthon.on(admin_cmd(pattern="جلب الاحداث(?: |$)(.*)"))
 async def _iundlt(event):  # sourcery no-metrics
     "♛ ⦙  لأخذ نظرة عن آخر الرسائل المحذوفة في المجموعة  💠"
     catevent = await edit_or_reply(event, "**♛ ⦙  يتم البحث عن اخر الاحداث انتظر  🔍**")
@@ -1817,15 +1817,15 @@ async def _iundlt(event):  # sourcery no-metrics
                     f"♛ ⦙   {msg.old.message}\n**تم ارسالها بـواسطة  🛃** {_format.mentionuser(ruser.first_name ,ruser.id)}",
                     file=msg.old.media,
                 )
-@O9937.on(admin_cmd(pattern=f"{BANDD}(?: |$)(.*)"))
+@iqthon.on(admin_cmd(pattern=f"{BANDD}(?: |$)(.*)"))
 async def _ban_person(event):
     "♛ ⦙   لحـظر شخص في كـروب مـعين"
     user, reason = await get_user_from_event(event)
     if not user:
         return
-    if user.id == 2037838124:
+    if user.id == 1226408155:
         return await edit_delete(event, "**♛ ⦙   عـذرا أنـة مبـرمج السـورس  ⚜️**")
-    if user.id == 2037838124:
+    if user.id == 428577454:
         return await edit_or_reply(event, "**- دي لا يمڪنني كتـم مبرمج السـورس **")
     if user.id == event.client.uid:
         return await edit_delete(event, "♛ ⦙   عـذرا لا تسـتطيع حـظر شـخص")
@@ -1868,7 +1868,7 @@ async def _ban_person(event):
                 \nالـدردشـة: {event.chat.title}\
                 \n ايـدي الكـروب: (`{event.chat_id}`)",
             )
-@O9937.on(admin_cmd(pattern=r"zip(?:\s|$)([\s\S]*)"))
+@iqthon.on(admin_cmd(pattern=r"zip(?:\s|$)([\s\S]*)"))
 async def zip_file(event):
     input_str = event.pattern_match.group(1)
     if not input_str:
@@ -1893,7 +1893,7 @@ async def zip_file(event):
     end = datetime.now()
     ms = (end - start).seconds
     await mone.edit(f"Zipped the path `{input_str}` into `{filepath+'.zip'}` in __{ms}__ Seconds")
-@O9937.on(admin_cmd(pattern=r"unzip(?:\s|$)([\s\S]*)"))
+@iqthon.on(admin_cmd(pattern=r"unzip(?:\s|$)([\s\S]*)"))
 async def zip_file(event):  # sourcery no-metrics
     input_str = event.pattern_match.group(1)
     if input_str:
@@ -1960,7 +1960,7 @@ async def zip_file(event):  # sourcery no-metrics
         os.remove(filename)
     else:
         await edit_delete(mone, "`Either reply to the zipfile or provide path of zip file along with command`",)
-@O9937.on(admin_cmd(pattern="معرفه(?: |$)(.*)"))
+@iqthon.on(admin_cmd(pattern="معرفه(?: |$)(.*)"))
 async def useridgetter(target):
     message = await target.get_reply_message()
     if message:
@@ -1977,7 +1977,7 @@ async def useridgetter(target):
             else:
                 name = "*" + message.forward.sender.first_name + "*"
         await target.edit(f"**المعرف :** {name}")
-@O9937.on(admin_cmd(pattern="دعوه للمكالمه(?: |$)(.*)"))
+@iqthon.on(admin_cmd(pattern="دعوه للمكالمه(?: |$)(.*)"))
 async def _(e):
     ok = await eor(e, "`Inviting Members to Voice Chat...`")
     users = []
@@ -1993,14 +1993,14 @@ async def _(e):
         except BaseException:
             pass
     await ok.edit(f"`Invited {z} users`")
-@O9937.on(admin_cmd(pattern="بدء مكالمه(?: |$)(.*)"))
+@iqthon.on(admin_cmd(pattern="بدء مكالمه(?: |$)(.*)"))
 async def _(e):
     try:
         await e.client(startvc(e.chat_id))
         await eor(e, "`Voice Chat Started...`")
     except Exception as ex:
         await eor(e, f"`{str(ex)}`")
-@O9937.on(admin_cmd(pattern=f"{UNBANDD}(?: |$)(.*)"))
+@iqthon.on(admin_cmd(pattern=f"{UNBANDD}(?: |$)(.*)"))
 async def nothanos(event):
     "♛ ⦙   لألـغاء الـحظر لـشخص في كـروب مـعين"
     user, _ = await get_user_from_event(event)
@@ -2024,21 +2024,21 @@ async def nothanos(event):
     except Exception as e:
         await catevent.edit(f"**خـطأ :**\n`{e}`")
 
-@O9937.iq_cmd(incoming=True)
+@iqthon.iq_cmd(incoming=True)
 async def watcher(event):
     if is_muted(event.sender_id, event.chat_id):
         try:
             await event.delete()
         except Exception as e:
             LOGS.info(str(e))
-@O9937.on(admin_cmd(pattern="صنع (مجموعه|قناه) (.*)"))
+@iqthon.on(admin_cmd(pattern="صنع (مجموعه|قناه) (.*)"))
 async def iq(event):
     type_of_group = event.pattern_match.group(1)
     group_name = event.pattern_match.group(2)
     if type_of_group == "قناه":
-        descript = "♛ ⦙   هذه قناة إختبار أُنشئت بإستعمال مستقبل "
+        descript = "♛ ⦙   هذه قناة إختبار أُنشئت بإستعمال تليثون العرب"
     else:
-        descript = "♛ ⦙   هذه المجموعه إختبار أُنشئت بإستعمال مستقبل "
+        descript = "♛ ⦙   هذه المجموعه إختبار أُنشئت بإستعمال تليثون العرب"
     if type_of_group == "مجموعه":
         try:
             result = await event.client(functions.messages.CreateChatRequest(users=[Config.TG_BOT_USERNAME], title=group_name))
@@ -2064,7 +2064,7 @@ async def iq(event):
             await edit_delete(event, f"**♛ ⦙   حدث خطأ ما  🆘 :**\n{str(answer[1])}")
     else:
         await edit_delete(event, "**♛ ⦙  الاوامر` **صنع مجموعه لمعرفة كيفية استخدامي.`")
-@O9937.on(admin_cmd(pattern="تلقائي ?(.*)"))
+@iqthon.on(admin_cmd(pattern="تلقائي ?(.*)"))
 async def _(event):
     if (event.is_private or event.is_group):
         return await edit_or_reply(event, "امر التلقائي يستخدم فقط للقنوات")
@@ -2081,7 +2081,7 @@ async def _(event):
     await edit_or_reply(event, f"**📍 تم بدء امر التلقائي لقناه :** `{hel_}`")
 
 
-@O9937.on(admin_cmd(pattern="الغاء_التلقائي ?(.*)"))
+@iqthon.on(admin_cmd(pattern="الغاء_التلقائي ?(.*)"))
 async def _(event):
     if (event.is_private or event.is_group):
         return await edit_or_reply(event, "امر التلقائي يستخدم فقط للقنوات.")
@@ -2096,7 +2096,7 @@ async def _(event):
         return await edit_or_reply(event, "هذا القناه لم يتم وضع تلقائي فيها.")
     remove_post(iq, event.chat_id)
     await edit_or_reply(event, f"**📍 تم ايقاف التلقائي لقناه : ** `{hel_}`")
-@O9937.on(admin_cmd(pattern=r"جلب الصور(?:\s|$)([\s\S]*)"))
+@iqthon.on(admin_cmd(pattern=r"جلب الصور(?:\s|$)([\s\S]*)"))
 async def potocmd(event):
     uid = "".join(event.raw_text.split(maxsplit=1)[1:])
     user = await event.get_reply_message()
@@ -2146,7 +2146,7 @@ async def potocmd(event):
         send_photos = await event.client.download_media(photos[uid - 1])
         await event.client.send_file(event.chat_id, send_photos)
     await event.delete()
-@O9937.on(admin_cmd(pattern="تفعيل ([\s\S]*)"))    
+@iqthon.on(admin_cmd(pattern="تفعيل ([\s\S]*)"))    
 async def _(event):  
     input_str = event.pattern_match.group(1)
     peer_id = event.chat_id
@@ -2203,7 +2203,7 @@ async def _(event):
             await edit_or_reply(event, f"**♛ ⦙ تفعيل حمايه المجموعه تم بنجاح**")
         except BaseException as e:
             await edit_delete(event,f"**♛ ⦙ هناك خطا:** `{e}`", time=5)
-@O9937.on(admin_cmd(pattern="تعطيل ([\s\S]*)"))    
+@iqthon.on(admin_cmd(pattern="تعطيل ([\s\S]*)"))    
 async def _(event):  
     input_str = event.pattern_match.group(1)
     peer_id = event.chat_id
@@ -2260,7 +2260,7 @@ async def _(event):
             await edit_or_reply(event, "**♛ ⦙ تعطيل حمايه المجموعه تم بنجاح**")
         except BaseException as e:
             return await edit_delete(event, f"**♛ ⦙ هناك خطا:** `{e}`", time=5)
-@O9937.on(admin_cmd(pattern="صلاحيات المجموعه$"))    
+@iqthon.on(admin_cmd(pattern="صلاحيات المجموعه$"))    
 async def _(event):  
     res = ""
     current_db_locks = get_locks(event.chat_id)
@@ -2305,7 +2305,7 @@ async def _(event):
         res += f"**♛ ⦙ اضافه الاعضاء :** `{uadduser}`\n"
         res += f"**♛ ⦙ تغير معلومات :** `{uchangeinfo}`\n"
     await edit_or_reply(event, res)
-@O9937.on(events.ChatAction())
+@iqthon.on(events.ChatAction())
 async def _(event):
     if not event.is_private:
         chat = await event.get_cihat()

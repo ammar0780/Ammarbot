@@ -5,7 +5,7 @@ from telethon.tl import functions, types
 from telethon.tl.functions.messages import GetStickerSetRequest
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 from telethon.utils import get_display_name
-from userbot import O9937
+from userbot import iqthon
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.tools import media_type
 from ..helpers.utils import _catutils
@@ -86,7 +86,7 @@ async def spam_function(event, sandy, cat, sleeptimem, sleeptimet, DelaySpam=Fal
             )
 
 
-@O9937.iq_cmd(pattern="تكرار حزمه الملصقات$",)
+@iqthon.iq_cmd(pattern="تكرار حزمه الملصقات$",)
 async def stickerpack_spam(event):
     reply = await event.get_reply_message()
     if not reply or media_type(reply) is None or media_type(reply) != "Sticker":
@@ -122,7 +122,7 @@ async def stickerpack_spam(event):
         await event.client.send_file(BOTLOG_CHATID, reqd_sticker_set.documents[0])
 
 
-@O9937.iq_cmd(    pattern="تكرار_احرف ([\s\S]*)",)
+@iqthon.iq_cmd(    pattern="تكرار_احرف ([\s\S]*)",)
 async def tmeme(event):
     cspam = str("".join(event.text.split(maxsplit=1)[1:]))
     message = cspam.replace(" ", "")
@@ -139,7 +139,7 @@ async def tmeme(event):
             await event.client.send_message(                BOTLOG_CHATID,                "#تكرار احرف\n"                + f"تكرار احرف {get_display_name(await event.get_chat())}(`{event.chat_id}`) chat with : `{message}`",            )
 
 
-@O9937.iq_cmd(    pattern="تكرار_كلمه ([\s\S]*)",)
+@iqthon.iq_cmd(    pattern="تكرار_كلمه ([\s\S]*)",)
 async def tmeme(event):
     wspam = str("".join(event.text.split(maxsplit=1)[1:]))
     message = wspam.split()
@@ -156,7 +156,7 @@ async def tmeme(event):
             await event.client.send_message(                BOTLOG_CHATID,                "#WSPAM\n"                + f"Word Spam was executed successfully in {get_display_name(await event.get_chat())}(`{event.chat_id}`) chat with : `{message}`",            )
 
 
-@O9937.iq_cmd(pattern=f"{MUQT} ([\s\S]*)",)
+@iqthon.iq_cmd(pattern=f"{MUQT} ([\s\S]*)",)
 async def spammer(event):
     reply = await event.get_reply_message()
     input_str = "".join(event.text.split(maxsplit=1)[1:]).split(" ", 2)

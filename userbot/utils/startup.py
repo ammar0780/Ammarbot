@@ -46,7 +46,7 @@ async def load_plugins(folder):
 async def startupmessage():
     try:
         if BOTLOG:
-            Config.CATUBLOGO = await iqthon.tgbot.send_file(BOTLOG_CHATID, "https://telegra.ph/file/bfb8f63d200132c7d21ab.jpg", caption="♛ ⦙ تـمّ اعـادة تشـغيل\n  Future ✓  :  [ 7.5 ] .\n\n♛ ⦙ للحصول على اوامر السورس\n أرسـل : (  `.اوامري`  ) \n\n♛ ⦙ لمـعرفة كيفية تغير بعض كلايش\n او صور السـورس  أرسـل  :\n (  `.مساعده`  )\n\n♛ ⦙ القناة الرسمية  العرب : @O9937\n♛ ⦙ فارات سورس   :@O9937 \n♛ ⦙ كلايش  :  @FGFFG\n ♛ ⦙التحديثات والاضافات :  @O9937\n",                buttons=[(Button.url("مطور الرسمي", "https://t.me/O9937"),)],            )
+            Config.CATUBLOGO = await iqthon.tgbot.send_file(BOTLOG_CHATID, "https://telegra.ph/file/bfb8f63d200132c7d21ab.jpg", caption="♛ ⦙ تـمّ اعـادة تشـغيل\n  Future ✓  :  [ 7.5 ] .\n\n♛ ⦙ للحصول على اوامر السورس\n أرسـل : (  `.اوامري`  ) \n\n♛ ⦙ لمـعرفة كيفية تغير بعض كلايش\n او صور السـورس  أرسـل  :\n (  `.مساعده`  )\n\n♛ ⦙ القناة الرسمية  العرب : @O9937\n♛ ⦙ فارات سورس   :@O9937 \n♛ ⦙ كلايش  :  @O9973\n ♛ ⦙التحديثات والاضافات :  @O9937\n",                buttons=[(Button.url("مطور الرسمي", "https://t.me/O9937"),)],            )
     except Exception as e:
         LOGS.error(e)
         return None
@@ -99,7 +99,7 @@ async def verifyLoggerGroup():
             LOGS.error(                "♛ ︙حدث استثناء عند محاولة التحقق من PRIVATE_GROUP_BOT_API_ID.\n"                + str(e)            )
     else:
         descript = "♛ ︙ لا تحذف هذه المجموعة أو تغير إلى مجموعة (إذا قمت بتغيير المجموعة ، فسيتم فقد كل شيئ .)"
-        _, groupid = await create_supergroup(            "مجموعه بوت تليثون الخاص بك", iqthon, Config.TG_BOT_USERNAME, descript        )
+        _, groupid = await create_supergroup(            "مجموعه بوت مستقيل الخاص بك", iqthon, Config.TG_BOT_USERNAME, descript        )
         addgvar("PRIVATE_GROUP_BOT_API_ID", groupid)
         print("♛ ︙ تم إنشاء مجموعة المسـاعدة بنجاح وإضافتها إلى المتغيرات.")
         flag = True

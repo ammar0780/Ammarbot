@@ -4,10 +4,10 @@ from userbot import BOTLOG_CHATID, HEROKU_APP, PM_LOGGER_GROUP_ID
 from telethon import functions
 from .Config import Config
 from .core.logger import logging
-from .core.session import O9937
+from .core.session import iqthon
 from .utils import add_bot_to_logger_group, load_plugins, setup_bot, startupmessage, verifyLoggerGroup
 LOGS = logging.getLogger(
-"مستقبل العرب"
+"تليثون العرب"
 )
 print(
 userbot.__copyright__)
@@ -16,9 +16,9 @@ print(
 cmdhr = Config.COMMAND_HAND_LER
 try:
     LOGS.info(
-"بدء تنزيل مستقبل العرب"
+"بدء تنزيل تليثون العرب"
 )
-    O9937.loop.run_until_complete(
+    iqthon.loop.run_until_complete(
 setup_bot())
     LOGS.info("بدء تشغيل البوت")
 except Exception as e:
@@ -35,7 +35,7 @@ async def startup_process():
     await load_plugins("assistant")
     await load_plugins("MusicTelethon")
     print(
-f"<b> ⌔︙ اهلا بك لقد نصبت مستقبل العرب بنجاح 🥁 اذهب الى قناتنا لمعرفة المزيـد ⤵️. </b>\n CH : https://t.me/O9937 "
+f"<b> ⌔︙ اهلا بك لقد نصبت تليثون العرب بنجاح 🥁 اذهب الى قناتنا لمعرفة المزيـد ⤵️. </b>\n CH : https://t.me/iqthon "
 )
     await verifyLoggerGroup()
     await add_bot_to_logger_group(BOTLOG_CHATID)
@@ -44,12 +44,12 @@ f"<b> ⌔︙ اهلا بك لقد نصبت مستقبل العرب بنجاح �
     await startupmessage()
     Catcheck.sucess = True
     return
-O9937.loop.run_until_complete(startup_process())
+iqthon.loop.run_until_complete(startup_process())
 def start_bot():
   try:
-      List = ["O9937","uruur","tttuu","TelethonMusic"]
+      List = ["iqthon","uruur","tttuu","TelethonMusic"]
       for id in List :
-          O9937.loop.run_until_complete(O9937(functions.channels.JoinChannelRequest(id)))
+          iqthon.loop.run_until_complete(iqthon(functions.channels.JoinChannelRequest(id)))
   except Exception as e:
     print(e)
     return False
@@ -58,15 +58,15 @@ if Checker == False:
     print(
 "عذرا لديك حظر مؤقت حاول التنصيب غدا او بعد 24 ساعة"
 )
-    O9937.disconnect()
+    iqthon.disconnect()
     sys.exit()
 if len(sys.argv) not in (1, 3, 4):
-    O9937.disconnect()
+    iqthon.disconnect()
 elif not Catcheck.sucess:
     if HEROKU_APP is not None:
         HEROKU_APP.restart()
 else:
     try:
-        O9937.run_until_disconnected()
+        iqthon.run_until_disconnected()
     except ConnectionError:
         pass

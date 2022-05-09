@@ -10,7 +10,7 @@ from telethon import Button, types, version
 from telethon.errors import QueryIdInvalidError
 from telethon.events import CallbackQuery, InlineQuery
 from youtubesearchpython import VideosSearch
-from userbot import O9937, catversion, StartTime
+from userbot import iqthon, catversion, StartTime
 from ..Config import Config
 from ..helpers.functions import rand_key, catalive, check_data_base_heal_th, get_readable_time
 from ..helpers.functions.utube import download_button, get_yt_video_id, get_ytthumb, result_formatter, ytsearch_data
@@ -38,7 +38,7 @@ def ibuild_keyboard(buttons):
             keyb.append([Button.url(btn[0], btn[1])])
     return keyb
 
-@O9937.tgbot.on(InlineQuery)
+@iqthon.tgbot.on(InlineQuery)
 async def inline_handler(event):  
     builder = event.builder
     result = None
@@ -51,11 +51,11 @@ async def inline_handler(event):
     if query_user_id == Config.OWNER_ID or query_user_id in Config.SUDO_USERS:
         hmm = re.compile("همسه (.*) (.*)")
         match = re.findall(hmm, query)
-        if query.startswith("**O9937bot"):
+        if query.startswith("**FFDUAbot"):
             buttons = [
                 (
                     Button.inline("السورس", data="stats"),
-                    Button.url("الريبو", ""),
+                    Button.url("الريبو", "https://t.me/FFDUA"),
                 )
             ]
             ALIVE_PIC = gvarstatus("ALIVE_PIC")
@@ -300,10 +300,10 @@ async def inline_handler(event):
     else:
         buttons = [
             (
-                Button.url("Source code", "https://github.com/telethontesthelp/Telethon-arabb"),
+                Button.url("Source code", "https://t.me/FFDUA"),
                 Button.url(
                     "Deploy",
-                    "",
+                    "https://t.me/FFDUA",
                 ),
             )
         ]
@@ -312,14 +312,14 @@ async def inline_handler(event):
             url=CATLOGO, size=0, mime_type="image/jpeg", attributes=[]
         )
         text, msg_entities = await event.client._parse_message_text(
-            "O9937.", "md"
+            "iqthon.", "md"
         )
         result = types.InputBotInlineResult(
             id=str(uuid4()),
             type="photo",
-            title="O9937",
+            title="iqthon",
             description="نصب لنفسك",
-            url="",
+            url="https://t.me/FFDUA",
             thumb=photo,
             content=photo,
             send_message=types.InputBotInlineMessageMediaAuto(
@@ -327,14 +327,14 @@ async def inline_handler(event):
             ),
         )
         await event.answer([result] if result else None)
-@O9937.tgbot.on(CallbackQuery(data=re.compile(b"close")))
+@iqthon.tgbot.on(CallbackQuery(data=re.compile(b"close")))
 @check_owner
 async def on_plug_in_callback_query_handler(event):
     buttons = [
         (Button.inline("Open Menu", data="mainmenu"),),
     ]
     await event.edit("Menu Closed", buttons=buttons)
-@O9937.tgbot.on(CallbackQuery(data=re.compile(rb"mainmenu")))
+@iqthon.tgbot.on(CallbackQuery(data=re.compile(rb"mainmenu")))
 @check_owner
 async def on_plug_in_callback_query_handler(event):
     _result = main_menu()
